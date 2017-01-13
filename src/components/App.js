@@ -22,7 +22,7 @@ class App extends Component {
 
     const searchTerm = that.state.searchTerm;
     const apiKey = "AIzaSyC3gY6wpailWpJB2DfbkJammzuKWbL8KvA";
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=4&q=${searchTerm}&key=${apiKey}`;
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${searchTerm}&key=${apiKey}`;
     axios.get(url)
       .then(function(response) {
         that.setState({videoList : response.data.items})

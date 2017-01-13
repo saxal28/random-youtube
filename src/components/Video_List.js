@@ -8,7 +8,6 @@ class Video_List extends Component {
   render() {
     return (
       <div className="box">
-
         {/*maps over video list array*/}
         {this.props.videoList.map((video, index) => {
           return (
