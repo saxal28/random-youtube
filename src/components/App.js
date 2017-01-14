@@ -1,32 +1,41 @@
 import React, { Component } from 'react';
 import Navbar from "./Navbar";
-import "../../public/styles/style.css";
-import Video_Player from "./Video_Player";
+import VideoPlayer from "./VideoPlayer";
 import Video_List from "./Video_List";
 import axios from 'axios';
-
+import { setSearchTerm } from "../actions/index.js";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      searchTerm : "pirates",
+      searchTerm : "dinosaurs",
       videoList: [],
-      videoUrl: [],
+      selectedVideo: "",
     }
   }
 
   getVideoList() {
     const that = this;
 
-    const searchTerm = that.state.searchTerm;
+    const searchTerm = this.state.searchTerm;
     const apiKey = "AIzaSyC3gY6wpailWpJB2DfbkJammzuKWbL8KvA";
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${searchTerm}&key=${apiKey}`;
     axios.get(url)
       .then(function(response) {
-        that.setState({videoList : response.data.items})
+        that.setState({
+          videoList : response.data.items,
+          selectedVideo : response.data.items[0]
+        })
     });
+  }
+
+  handleButtonPress() {
+    const value = document.body.querySelector("input").value;
+    this.setState({searchTerm: value}, () =>  this.getVideoList());
   }
 
   componentWillMount() {
@@ -36,15 +45,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar handleButtonPress={this.handleButtonPress.bind(this)}/>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-sm-8">
-              <Video_Player />
+            <div className="col-md-8">
+              <VideoPlayer selectedVideo={this.state.selectedVideo}/>
               {console.log(this.state.videoList)}
             </div>
-            <div className="col-sm-4">
-              <Video_List videoList={this.state.videoList}/>
+            <div className="col-md-4">
+              <Video_List videoList={this.state.videoList} selectedVideo={this.state.selectedVideo}/>
             </div>
           </div>
         </div>
@@ -53,7 +62,21 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    selectedVideo: state.selectedVideo,
+    defaultSearchTerm: state.defaultSearchTerm
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    setSearchTerm
+  }, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 
 // YOUTUBE URL BREAKDOWN

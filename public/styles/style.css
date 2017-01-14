@@ -15,10 +15,12 @@ body {
 
 .box {
   background:white;
+  max-width: 400px;
+  margin:0px auto;
 }
 
 .side-video {
-  border-bottom:1px solid lightgray;
+  border:1px solid lightgray;
   background:white;
   padding:10px;
   max-width: 400px;
