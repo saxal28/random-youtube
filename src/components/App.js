@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Navbar from "./Navbar";
 import VideoPlayer from "./VideoPlayer";
-import Video_List from "./Video_List";
+import VideoList from "./VideoList";
 import axios from 'axios';
-import { setSearchTerm } from "../actions/index.js";
+import { setSearchTerm, selectVideo } from "../actions/index.js";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
@@ -53,7 +53,10 @@ class App extends Component {
               {console.log(this.state.videoList)}
             </div>
             <div className="col-md-4">
-              <Video_List videoList={this.state.videoList} selectedVideo={this.state.selectedVideo}/>
+              <VideoList
+                videoList={this.state.videoList}
+                selectedVideo={this.state.selectedVideo}
+                onVideoSelect={(selectedVideo) => this.setState({ selectedVideo }) } />
             </div>
           </div>
         </div>
@@ -65,13 +68,15 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     selectedVideo: state.selectedVideo,
-    defaultSearchTerm: state.defaultSearchTerm
+    defaultSearchTerm: state.defaultSearchTerm,
+
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setSearchTerm
+    setSearchTerm,
+    selectVideo
   }, dispatch)
 }
 
