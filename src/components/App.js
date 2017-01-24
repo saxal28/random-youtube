@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import Navbar from "./Navbar";
 import VideoPlayer from "./VideoPlayer";
 import VideoList from "./VideoList";
+import VideoDetail from "./VideoDetail";
 import axios from 'axios';
 import { setSearchTerm, selectVideo } from "../actions/index.js";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import Nouns from "../dataStructures/Nouns_Object";
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class App extends Component {
       .then(function(response) {
         that.setState({
           videoList : response.data.items,
-          selectedVideo : response.data.items[0]
+          selectedVideo : response.data.items[1]
         })
     });
   }
@@ -38,6 +40,13 @@ class App extends Component {
     this.setState({searchTerm: value}, () =>  this.getVideoList());
   }
 
+  handleRandomButtonPress() {
+    console.log(Nouns.nouns.length)
+    var randomNumber = Math.floor(Math.random() * (970-1) + 1);
+    var randomNoun = Nouns.nouns[randomNumber];
+    this.setState({searchTerm: randomNoun}, () => this.getVideoList());
+  }
+
   componentWillMount() {
     this.getVideoList();
   }
@@ -45,12 +54,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar handleButtonPress={this.handleButtonPress.bind(this)}/>
+        <Navbar handleButtonPress={this.handleButtonPress.bind(this)} handleRandomButtonPress={this.handleRandomButtonPress.bind(this)} searchTerm={this.state.searchTerm}/>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-8">
               <VideoPlayer selectedVideo={this.state.selectedVideo}/>
               {console.log(this.state.videoList)}
+              <VideoDetail selectedVideo={this.state.selectedVideo} />
             </div>
             <div className="col-md-4">
               <VideoList

@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 class VideoList extends Component {
 
+  isSelectedVideo(video) {
+    if(this.props.selectedVideo.snippet.title === video) {
+      return true;
+      console.log(true)
+    } else {
+      console.log(false)
+    }
+  }
+
   render() {
     return (
       <div className="box">
@@ -15,8 +24,10 @@ class VideoList extends Component {
                   <img src={video.snippet.thumbnails.default.url} className="img-responsive" role="presentation" />
                 </div>
                 <div className="col-xs-6" className="text-left">
-                  <p>{video.snippet.title.substring(0,40) + "..."}</p>
-                  <p><strong>{video.snippet.channelTitle}</strong></p>
+                  <p>{this.isSelectedVideo(video.snippet.title) ? <i className="fa fa-hand-o-right" aria-hidden="true"></i> : ""}{video.snippet.title}</p>
+                </div>
+                <div className="col-xs-12" >
+                  <p className="side-video-author"><strong style={{color:"red"}}>{video.snippet.channelTitle}</strong></p>
                 </div>
               </div>
             )

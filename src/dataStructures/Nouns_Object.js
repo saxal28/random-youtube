@@ -1,34 +1,24 @@
-export default const Nouns =
+var Nouns =
 // 20170112193952
 // https://raw.githubusercontent.com/dariusk/corpora/master/data/words/nouns.json
 {
   "description": "A list of English nouns.",
   "nouns": [
     "Armour",
-    "Barrymore",
-    "Cabot",
     "Catholicism",
     "Chihuahua",
     "Christianity",
     "Easter",
     "Frenchman",
-    "Lowry",
-    "Mayer",
     "Orientalism",
     "Pharaoh",
     "Pueblo",
-    "Pullman",
     "Rodeo",
     "Saturday",
     "Sister",
-    "Snead",
-    "Syrah",
-    "Tuesday",
-    "Woodward",
     "abbey",
     "absence",
     "absorption",
-    "abstinence",
     "absurdity",
     "abundance",
     "acceptance",
@@ -917,7 +907,6 @@ export default const Nouns =
     "tendon",
     "terrier",
     "terror",
-    "terry",
     "theater",
     "theology",
     "therapy",
@@ -968,15 +957,11 @@ export default const Nouns =
     "victory",
     "viewpoint",
     "villa",
-    "vindication",
-    "violation",
-    "vista",
     "vocalist",
     "vogue",
     "volcano",
     "voltage",
     "vomiting",
-    "vulnerability",
     "waistcoat",
     "waitress",
     "wardrobe",
@@ -986,16 +971,22 @@ export default const Nouns =
     "weariness",
     "whereabouts",
     "whisky",
-    "whiteness",
-    "widget",
-    "width",
     "windfall",
     "wiring",
     "witchcraft",
-    "withholding",
-    "womanhood",
-    "words",
-    "workman",
-    "youngster"
   ]
 }
+
+var secondary = {
+  words: [
+    'documentary',
+    'mystery',
+    'history',
+    'facts',
+    'information',
+    'tutorial',
+    'demo'
+  ]
+}
+
+export default Nouns

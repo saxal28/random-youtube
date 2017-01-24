@@ -3,14 +3,16 @@ import React from 'react';
 const Navbar = (props) =>  {
   return (
     <div className="nav text-center">
-     <img src="http://i.imgur.com/dqN9mf1.png" className="logo" role="presentation" />
-     <input type="text" defaultValue="pirates" />
+     <img src="https://i.ytimg.com/vi/a4R0PqiWxY0/maxresdefault.jpg" className="logo" role="presentation" />
+     <input type="text" placeholder={props.searchTerm}/>
      <button
        onClick={props.handleButtonPress}
        className="btn search-button">
        <i className="fa fa-search" aria-hidden="true"></i>
       </button>
-     <button className="btn search-button">Random!</button>
+     <button
+       onClick={props.handleRandomButtonPress}
+       className="btn search-button">Random!</button>
     </div>
   )
 }
