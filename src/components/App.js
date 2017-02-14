@@ -37,7 +37,10 @@ class App extends Component {
 
   handleButtonPress() {
     const value = document.body.querySelector("input").value;
-    this.setState({searchTerm: value}, () =>  this.getVideoList());
+    this.setState({searchTerm: value}, () =>  {
+      this.getVideoList();
+      document.body.querySelector("input").value = "";
+    })
   }
 
   handleRandomButtonPress() {
