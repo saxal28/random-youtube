@@ -13,7 +13,7 @@ class VideoList extends Component {
 
   render() {
     return (
-      <div className="box">
+      <div>
         {/*maps over video list array*/}
         {this.props.videoList.map((video, index) => {
           if(index !== 0 && video.id.videoId) {
